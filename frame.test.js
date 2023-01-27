@@ -41,9 +41,9 @@ describe("Constructor raises appropriate error for invalid frame scores", () => 
   });
 });
 
-// it("strike() returns boolean of whether frame is a strike", () => {
-//   expect(strikeFrame.strike()).toBe(true);
-//   expect(finalFrame.strike()).toBe(true);
-//   expect(regularFrame.strike()).toBe(false);
-//   expect(spareFrame.strike()).toBe(false);
-// });
+it("strike() returns boolean of whether frame is a strike", () => {
+  expect(strikeFrame.strike()).toBe(true);
+  expect(finalFrame.strike()).toBe(true);
+  expect(regularFrame.strike()).toBe(false);
+  expect(spareFrame.strike()).toBe(false);
+});
