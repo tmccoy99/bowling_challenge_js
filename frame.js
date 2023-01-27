@@ -32,7 +32,7 @@ class Frame {
     const balls = [this.firstBall, this.secondBall, this.thirdBall];
     if (!balls.every(this.#validBall)) {
       throw new Error(
-        "Entries to the frame constructor must be integers between 1 and 10!"
+        "Arguments of the Frame constructor must be integers between 1 and 10!"
       );
     }
   }

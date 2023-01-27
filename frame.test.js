@@ -21,21 +21,21 @@ describe("Constructor raises appropriate error for invalid frame scores", () => 
       new Frame(11, 5);
     }).toThrow(
       new Error(
-        "Entries to the frame constructor must be integers between 1 and 10!"
+        "Arguments of the Frame constructor must be integers between 1 and 10!"
       )
     );
     expect(() => {
       new Frame(5, -1);
     }).toThrow(
       new Error(
-        "Entries to the frame constructor must be integers between 1 and 10!"
+        "Arguments of the Frame constructor must be integers between 1 and 10!"
       )
     );
     expect(() => {
       new Frame(5, 5, "hi");
     }).toThrow(
       new Error(
-        "Entries to the frame constructor must be integers between 1 and 10!"
+        "Arguments of the Frame constructor must be integers between 1 and 10!"
       )
     );
   });
