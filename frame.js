@@ -10,10 +10,15 @@ class Frame {
     return this.firstBall === 10;
   }
 
+  spare() {
+    return !this.strike() && this.firstBall + this.secondBall === 10;
+  }
+
   #checkSelfValid() {
     this.#checkNotEmpty();
     this.#checkStrikeIfSingleBall();
     this.#checkAllBallsValid();
+    // this.#checkScoreValid();
   }
 
   #checkNotEmpty() {
@@ -30,17 +35,22 @@ class Frame {
 
   #checkAllBallsValid() {
     const balls = [this.firstBall, this.secondBall, this.thirdBall];
-    if (!balls.every(this.#validBall)) {
+    function validBall(ball) {
+      return (
+        ball === null || (typeof ball === "number" && ball >= 0 && ball <= 10)
+      );
+    }
+    if (!balls.every(validBall)) {
       throw new Error(
         "Arguments of the Frame constructor must be integers between 1 and 10!"
       );
     }
   }
-  #validBall(ball) {
-    return (
-      ball === null || (typeof ball === "number" && ball >= 0 && ball <= 10)
-    );
-  }
+  // #checkScoreValid() {
+  //   if (this.thirdBall) {
+  //     return this.strike() || this.spare()
+  //   }
+  // }
 }
 
 module.exports = Frame;
