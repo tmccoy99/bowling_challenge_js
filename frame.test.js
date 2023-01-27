@@ -77,4 +77,10 @@ describe("Frame getter and setter methods implemented properly", () => {
     expect(spareFrame.getSecondBall()).toBe(9);
     expect(finalFrame.getThirdBall()).toBe(10);
   });
+
+  it("Next frame can be read and set", () => {
+    expect(regularFrame.getNext()).toBe(null);
+    regularFrame.setNext(strikeFrame);
+    expect(regularFrame.getNext()).toStrictEqual(strikeFrame);
+  });
 });
