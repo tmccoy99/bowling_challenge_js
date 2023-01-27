@@ -3,7 +3,28 @@ class Frame {
     this.firstBall = firstBall;
     this.secondBall = secondBall;
     this.thirdBall = thirdBall;
+    this.next = null;
     this.#checkSelfValid();
+  }
+
+  setNext(frame) {
+    this.next = frame;
+  }
+
+  getNext() {
+    return this.next;
+  }
+
+  getFirstBall() {
+    return this.firstBall;
+  }
+
+  getSecondBall() {
+    return this.secondBall;
+  }
+
+  getThirdBall() {
+    return this.thirdBall;
   }
 
   strike() {
@@ -18,7 +39,7 @@ class Frame {
     this.#checkNotEmpty();
     this.#checkStrikeIfSingleBall();
     this.#checkAllBallsValid();
-    // this.#checkScoreValid();
+    this.#checkScoreValid();
   }
 
   #checkNotEmpty() {
@@ -42,15 +63,27 @@ class Frame {
     }
     if (!balls.every(validBall)) {
       throw new Error(
-        "Arguments of the Frame constructor must be integers between 1 and 10!"
+        "Arguments of the Frame constructor must be integers between 0 and 10!"
       );
     }
   }
-  // #checkScoreValid() {
-  //   if (this.thirdBall) {
-  //     return this.strike() || this.spare()
-  //   }
-  // }
+
+  #checkScoreValid() {
+    const validScore = this.thirdBall
+      ? this.#validThreeBallScore()
+      : this.#validNormalScore();
+    if (!validScore) {
+      throw new Error("The score of a frame must be valid!");
+    }
+  }
+
+  #validNormalScore() {
+    return this.firstBall + this.secondBall <= 10;
+  }
+
+  #validThreeBallScore() {
+    return this.strike() || this.spare();
+  }
 }
 
 module.exports = Frame;
