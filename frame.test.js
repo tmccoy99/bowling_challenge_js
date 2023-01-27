@@ -23,48 +23,58 @@ describe("Constructor raises appropriate error for invalid arguments", () => {
       new Frame(11, 5);
     }).toThrow(
       new Error(
-        "Arguments of the Frame constructor must be integers between 1 and 10!"
+        "Arguments of the Frame constructor must be integers between 0 and 10!"
       )
     );
     expect(() => {
       new Frame(5, -1);
     }).toThrow(
       new Error(
-        "Arguments of the Frame constructor must be integers between 1 and 10!"
+        "Arguments of the Frame constructor must be integers between 0 and 10!"
       )
     );
     expect(() => {
       new Frame(5, 5, "hi");
     }).toThrow(
       new Error(
-        "Arguments of the Frame constructor must be integers between 1 and 10!"
+        "Arguments of the Frame constructor must be integers between 0 and 10!"
       )
     );
   });
 
-  // it("rejects invalid Frame scores", () => {
-  //   expect(() => {
-  //     new Frame(2, 9);
-  //   }).toThrow(new Error("The score of a frame must be valid!"));
-  //   expect(() => {
-  //     new Frame(10, 1);
-  //   }).toThrow(new Error("The score of a frame must be valid!"));
-  //   expect(() => {
-  //     new Frame(1, 8, 5);
-  //   }).toThrow(new Error("The score of a frame must be valid!"));
-  // });
+  it("rejects invalid Frame scores", () => {
+    expect(() => {
+      new Frame(2, 9);
+    }).toThrow(new Error("The score of a frame must be valid!"));
+    expect(() => {
+      new Frame(10, 1);
+    }).toThrow(new Error("The score of a frame must be valid!"));
+    expect(() => {
+      new Frame(1, 8, 5);
+    }).toThrow(new Error("The score of a frame must be valid!"));
+  });
 });
 
-it("strike() returns boolean of whether frame is a strike", () => {
-  expect(strikeFrame.strike()).toBe(true);
-  expect(finalFrame.strike()).toBe(true);
-  expect(regularFrame.strike()).toBe(false);
-  expect(spareFrame.strike()).toBe(false);
+describe("Frame can correctly self assess whether it is a spare or strike", () => {
+  it("strike() returns boolean of whether frame is a strike", () => {
+    expect(strikeFrame.strike()).toBe(true);
+    expect(finalFrame.strike()).toBe(true);
+    expect(regularFrame.strike()).toBe(false);
+    expect(spareFrame.strike()).toBe(false);
+  });
+
+  it("spare() returns boolean of whether frame is a spare", () => {
+    expect(strikeFrame.spare()).toBe(false);
+    expect(finalFrame.spare()).toBe(false);
+    expect(regularFrame.spare()).toBe(false);
+    expect(spareFrame.spare()).toBe(true);
+  });
 });
 
-it("spare() returns boolean of whether frame is a spare", () => {
-  expect(strikeFrame.spare()).toBe(false);
-  expect(finalFrame.spare()).toBe(false);
-  expect(regularFrame.spare()).toBe(false);
-  expect(spareFrame.spare()).toBe(true);
+describe("Frame getter and setter methods implemented properly", () => {
+  it("Getter methods allow ball values to be read", () => {
+    expect(regularFrame.getFirstBall()).toBe(5);
+    expect(spareFrame.getSecondBall()).toBe(9);
+    expect(finalFrame.getThirdBall()).toBe(10);
+  });
 });
