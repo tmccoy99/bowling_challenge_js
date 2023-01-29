@@ -27,7 +27,28 @@ class Scorecard {
   }
 
   #calculateFrameScore(frame) {
-    return frame.getFirstBall() + frame.getSecondBall() + frame.getThirdBall();
+    let score = frame.getFirstBall() + frame.getSecondBall();
+    if (frame.getThirdBall()) {
+      return score + frame.getThirdBall();
+    } else if (frame.spare()) {
+      return score + this.#spareBonus(frame);
+    } else if (frame.strike()) {
+      return score + this.#strikeBonus(frame);
+    } else {
+      return score;
+    }
+  }
+
+  #spareBonus(frame) {
+    return frame.next.getFirstBall();
+  }
+
+  #strikeBonus(frame) {
+    let bonus = frame.next.getFirstBall();
+    bonus += frame.next.getSecondBall()
+      ? frame.next.getSecondBall()
+      : frame.next.next.getFirstBall();
+    return bonus;
   }
 
   #updateLinkedListStructure(frame) {
