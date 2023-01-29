@@ -1,1 +1,0 @@
-const Scorecard = require("./scorecard");
