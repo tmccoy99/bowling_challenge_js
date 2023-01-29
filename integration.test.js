@@ -39,14 +39,22 @@ it("Scorecard will throw error if calculate is called before 10 frames added", (
   }).toThrow(new Error("10 frames must be added before calculation!"));
 });
 
-it("Scorecard can calculate correct score in game with no strikes or spares", () => {
+it("Scorecard can calculate correct score in game with no strikes, spares or gutters", () => {
   for (let i = 1; i <= 10; i++) {
     scorecard.add(new Frame(2, 2));
   }
   expect(scorecard.calculateTotalScore()).toBe(40);
 });
 
-it("Scorecard can calculate correct score in game with strikes and spares", () => {
+it("Scorecard can calculate correct score in game with strikes, spares and gutters", () => {
   fill(scorecard);
   expect(scorecard.calculateTotalScore()).toBe(133);
+});
+
+it("Scorecard can calculate games with sequential strikes", () => {
+  for (let i = 1; i <= 9; i++) {
+    scorecard.add(new Frame(10));
+  }
+  scorecard.add(new Frame(10, 10, 10));
+  expect(scorecard.calculateTotalScore()).toBe(300);
 });
