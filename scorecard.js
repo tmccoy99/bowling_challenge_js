@@ -13,16 +13,30 @@ class Scorecard {
     }
   }
 
-  calculate() {}
+  calculateTotalScore() {
+    if (this.frameCount != 10) {
+      throw new Error("10 frames must be added before calculation!");
+    }
+    let currentFrame = this.firstFrame;
+    let score = 0;
+    while (currentFrame) {
+      score += this.#calculateFrameScore(currentFrame);
+      currentFrame = currentFrame.next;
+    }
+    return score;
+  }
+
+  #calculateFrameScore(frame) {
+    return frame.getFirstBall() + frame.getSecondBall() + frame.getThirdBall();
+  }
 
   #updateLinkedListStructure(frame) {
     if (this.frameCount === 0) {
       this.firstFrame = frame;
-      this.lastFrame = frame;
     } else {
       this.lastFrame.next = frame;
-      this.lastFrame = frame;
     }
+    this.lastFrame = frame;
   }
 }
 
