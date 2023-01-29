@@ -33,7 +33,7 @@ it("Scorecard does not allow more than ten frames to be added", () => {
   }).toThrow(new Error("Only 10 frames can be added to one scorecard!"));
 });
 
-it("Scorecard will throw error if calculate is called before 10 frames added", () => {
+it("calculateTotalScore() will throw error if called before 10 frames added", () => {
   expect(() => {
     scorecard.calculateTotalScore();
   }).toThrow(new Error("10 frames must be added before calculation!"));
