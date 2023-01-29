@@ -33,7 +33,20 @@ it("Scorecard does not allow more than ten frames to be added", () => {
   }).toThrow(new Error("Only 10 frames can be added to one scorecard!"));
 });
 
-it("Scorecard can calculate correct score with ten frames added", () => {
-  scorecard = fullScorecard();
-  expect(scorecard.calculate()).toBe(133);
+it("Scorecard will throw error if calculate is called before 10 frames added", () => {
+  expect(() => {
+    scorecard.calculateTotalScore();
+  }).toThrow(new Error("10 frames must be added before calculation!"));
+});
+
+it("Scorecard can calculate correct score in game with no strikes or spares", () => {
+  for (let i = 1; i <= 10; i++) {
+    scorecard.add(new Frame(2, 2));
+  }
+  expect(scorecard.calculateTotalScore()).toBe(40);
+});
+
+it("Scorecard can calculate correct score in game with strikes and spares", () => {
+  fill(scorecard);
+  expect(scorecard.calculateTotalScore()).toBe(133);
 });
