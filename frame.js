@@ -43,7 +43,7 @@ class Frame {
   }
 
   #checkNotEmpty() {
-    if (!this.firstBall) {
+    if (!this.firstBall && !(this.firstBall === 0)) {
       throw new Error("A frame must have at least one ball!");
     }
   }
